@@ -1,0 +1,238 @@
+@CHARSET "UTF-8";
+body {
+	 background-color: #FFFFF0;
+}
+#articleForm label.error {
+	float: right;
+	color: red;
+	height: 8px;
+	font-size: 13px;
+	padding: 0px 0px 0px 10px;
+}
+#changepwForm label.error {
+	float: right;
+	color: red;
+	height: 8px;
+	font-size: 13px;
+	padding: 0px 0px 0px 10px;
+}
+#dataForm label.error {
+	float: right;
+	color: red;
+	height: 8px;
+	font-size: 13px;
+	padding: 0px 0px 0px 10px;
+}
+#changeArticleForm label.error {
+	float: right;
+	color: red;
+	height: 8px;
+	font-size: 13px;
+	padding: 0px 0px 0px 10px;
+}
+.main {
+	width: 1000px;
+	MARGIN-RIGHT: auto;
+    MARGIN-LEFT: auto;
+}
+.topDiv {
+	
+}
+.topLeftDiv {
+	padding: 20px 0px 5px 0px;
+	
+	height: 150px;
+}
+.blank {
+	height: 2px;
+}
+.topRightDiv {
+	-moz-border-radius: 8px;
+ 	-webkit-border-radius: 8px;
+ 	border-radius: 8px;
+	border: 2px #E0E0E0 double;
+	height: 174px;
+	padding: 5px 5px 5px 8px;
+	font-size: 13px;
+}
+.addArticleDiv {
+	border: 0px #E0E0E0 solid;
+	
+ 	display: none;
+ 	background-color:#DFFFDF;
+}
+.title {
+	font-family: '黑体';
+	color: #0151AE;
+	padding: 10px 0px 0px 20px;
+	font-size: 20px;
+}
+.table {
+	background-color: #ffffff;
+}
+.myArticleDiv {
+	border: 2px #E0E0E0 solid;
+	-moz-border-radius: 8px;
+ 	-webkit-border-radius: 8px;
+ 	border-radius: 8px;
+ 	padding: 5px 5px 5px 5px;
+ 	font-size: 14px;
+ 	
+}
+.changepwDiv {
+	background-color: #FFFFFF;
+	border: 1px #E0E0E0 solid;
+	-moz-border-radius: 8px;
+ 	-webkit-border-radius: 8px;
+ 	border-radius: 8px;
+ 	padding: 10px 20px 10px 20px;
+	width:380px;
+	height:200px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-100px 0 0 -210px;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";  /* For IE 8 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');  /* For IE 5.5 - 7 */
+	-moz-box-shadow: 2px 2px 10px #909090;/* for firefox */
+	-webkit-box-shadow: 2px 2px 10px #909090;/* for safari or chrome */
+	box-shadow:2px 2px 10px #909090;/* for opera or ie9 */ 
+}
+
+.changeDataDiv {
+	background-color: #FFFFFF;
+	border: 1px #E0E0E0 solid;
+	-moz-border-radius: 8px;
+ 	-webkit-border-radius: 8px;
+ 	border-radius: 8px;
+ 	padding: 15px 20px 10px 20px;
+	width:400px;
+	height:280px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-152px 0 0 -220px;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";  /* For IE 8 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');  /* For IE 5.5 - 7 */
+	-moz-box-shadow: 2px 2px 10px #909090;/* for firefox */
+	-webkit-box-shadow: 2px 2px 10px #909090;/* for safari or chrome */
+	box-shadow:2px 2px 10px #909090;/* for opera or ie9 */ 
+}
+.viewDiv{
+	border-left: 1px #E0E0E0 solid;
+	border-right: 1px #E0E0E0 solid;
+	width:800px;
+	position:absolute;
+	left:50%;
+	margin:0px 0 0 -420px; 
+	font-size: 14px;
+	background-color: #FFFFCC;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";  /* For IE 8 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');  /* For IE 5.5 - 7 */
+	-moz-box-shadow: 2px 2px 10px #909090;/* for firefox */
+	-webkit-box-shadow: 2px 2px 10px #909090;/* for safari or chrome */
+	box-shadow:2px 2px 10px #909090;/* for opera or ie9 */
+}
+.viewDiv{
+	border-left: 1px #E0E0E0 solid;
+	
+ 	padding: 15px 20px 10px 20px;
+	width:800px;
+	position:absolute;
+	left:50%;
+	margin:0px 0 0 -420px; 
+	font-size: 14px;
+	background-color: #FFFFCC;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";  /* For IE 8 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');  /* For IE 5.5 - 7 */
+	-moz-box-shadow: 2px 2px 10px #909090;/* for firefox */
+	-webkit-box-shadow: 2px 2px 10px #909090;/* for safari or chrome */
+	box-shadow:2px 2px 10px #909090;/* for opera or ie9 */
+}
+.changeArticleDiv {
+	border-left: 1px #E0E0E0 solid;
+	border-right: 1px #E0E0E0 solid;
+ 	padding: 15px 20px 10px 20px;
+	width:800px;
+	position:absolute;
+	left:50%;
+	margin:0px 0 0 -420px; 
+	font-size: 14px;
+	background-color: #FFFFCC;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";  /* For IE 8 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');  /* For IE 5.5 - 7 */
+	-moz-box-shadow: 2px 2px 10px #909090;/* for firefox */
+	-webkit-box-shadow: 2px 2px 10px #909090;/* for safari or chrome */
+	box-shadow:2px 2px 10px #909090;/* for opera or ie9 */
+}
+.loginDiv {
+	border: 0px #E0E0E0 solid;
+	width:1000px;
+	height:280px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-140px 0 0 -500px; 
+	background:	#015198;
+    -moz-border-radius: 8px;
+ 	-webkit-border-radius: 8px;
+ 	border-radius: 8px;
+ 	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";  /* For IE 8 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');  /* For IE 5.5 - 7 */
+	-moz-box-shadow: 2px 2px 10px #909090;/* for firefox */
+	-webkit-box-shadow: 2px 2px 10px #909090;/* for safari or chrome */
+	box-shadow:2px 2px 10px #909090;/* for opera or ie9 */
+}
+.loginTop {
+	position:absolute;
+	width: 450px;
+	height:	50px;
+	left:50%;
+	top:45%;
+	margin:-125px 0 0 -190px; 
+}
+.inner1 {
+	border: 0px #E0E0E0 solid;
+	position:absolute;
+	width: 450px;
+	height:	180px;
+	left:30%;
+	top: 45%;
+	margin:-50px 0 0 -200px; 
+	text-align: center;
+	color: #FFFFFF;
+	padding: 10px 10px 10px 10px;
+	font-size: 18px;
+	
+}
+.inner2 {
+	border: 1px #E0E0E0 dotted;
+	position:absolute;
+	width: 360px;
+	height:	154px;
+	left:75%;
+	top: 45%;
+	margin:-50px 0 0 -200px; 
+	text-align: left;
+	color: #FFFFFF;
+	padding: 5px 8px 5px 8px;
+	font-size: 13px;
+}
+table.logintable {
+	margin:0px 0px 5px 45px;
+	text-align: left;
+	width: 450px;
+}
+tr {
+	height: 30px;	
+}
+input.invalid {
+	background-color: #FF9;
+}
+
+span.invalid {
+	color: #F00;
+	font-weight: bold;
+	
+}
+

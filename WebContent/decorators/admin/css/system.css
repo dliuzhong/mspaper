@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+ul {
+	font-size: 14px;
+	color: #000;
+	
+}	
+a:link {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #FFFFFF;
+}
+
+.selectDiv {
+	width: 800px;
+	height: 300px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -150px 0 0 -400px;
+	background: #004B97;
+	text-align: left;
+}
+
+td {
+	cursor: pointer;
+	color: #FFFFFF;
+}

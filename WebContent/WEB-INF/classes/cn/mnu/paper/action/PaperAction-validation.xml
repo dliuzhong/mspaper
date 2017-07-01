@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 指定校验配置文件的DTD信息 -->
+<!DOCTYPE validators PUBLIC 
+	"-//OpenSymphony Group//XWork Validator 1.0.3//EN"
+	"http://www.opensymphony.com/xwork/xwork-validator-1.0.3.dtd">
+<!-- 校验文件的根元素 -->
+<validators>
+	<!-- 校验Paper属性的paper属性 -->
+	<field name="model.paper">
+		<!-- 指定name属性必须满足必填规则 -->
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<!-- 如果校验失败，输出user.required对应的国际化信息 -->
+			<message>未输入期号</message>
+		</field-validator>
+		<!-- 指定name属性必须匹配正则表达式 -->
+		<field-validator type="regex">
+			<param name="expression"><![CDATA[(\w{1,15})]]></param>
+			<!-- 如果校验失败，输出user.regex对应的国际化信息 -->
+			<message>期号只能为字母和数字组成，1-15</message>
+		</field-validator>
+	</field>
+	<!-- 校验Paper属性的zb属性 -->
+	<field name="model.zb">
+		<!-- 指定pass属性必须满足必填规则 -->
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>未输入主办</message>
+		</field-validator>
+		
+	</field>
+	<!-- 校验Paper属性的cb属性 -->
+	<field name="model.cb">
+		<!-- 指定pass属性必须满足必填规则 -->
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>未输入出版</message>
+		</field-validator>
+		
+	</field>
+	<!-- 校验Paper属性的zongb属性 -->
+	<field name="model.zongb">
+		<!-- 指定pass属性必须满足必填规则 -->
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>未输入总编</message>
+		</field-validator>
+		
+	</field>
+	<!-- 校验Paper属性的cbtime属性 -->
+	<field name="model.cbtime">
+		<!-- 指定pass属性必须满足必填规则 -->
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>未输入出版日期</message>
+		</field-validator>
+		<field-validator type="data">
+			<param name="min">1900-01-01</param>
+			<param name="max">2100-12-31</param>
+			<message>日期必须在${min}到${max}之间</message>
+		</field-validator>
+	</field>
+	<!-- 校验Paper属性的email属性 -->
+	<field name="model.email">
+		<!-- 指定pass属性必须满足必填规则 -->
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>未输入出版日期</message>
+		</field-validator>
+		<field-validator type="regex">
+			<param name="expression"><![CDATA[(/[a-zA-Z\d!#%&'*+-/\?\^\(\|~][\w\d!#%&'*+-\./\?\^\(\|~]+@[a-zA-Z\d-]+(\.[a-zA-Z\d-]{2,})+/)]]></param>
+			
+			<message>未输入正确的email地址</message>
+		</field-validator>
+	</field>
+	<field name="model.lay_sum">
+		<!-- 指定pass属性必须满足必填规则 -->
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>未输入出版日期</message>
+		</field-validator>
+		<field-validator type="int">
+			<message>未输入正确的数字</message>
+		</field-validator>
+	</field>
+</validators>

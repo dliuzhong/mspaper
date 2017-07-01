@@ -1,0 +1,105 @@
+/* CSS Document */
+
+.title {
+	font-family: '黑体';
+	width: 100%;
+	text-align:center;
+	font-weight:500;
+	height:30px;
+	font-size: 18px;
+	padding:8px 8px 5px;
+	
+}
+.other {
+	width: 100%;
+	
+	text-align:center;
+	font-size:13px;
+	color:#999999;
+	height:5px 5px 5px 5px;
+}
+.text {
+	width: 100%;
+	font-size:14px;
+	font:"宋体";
+	line-height: 150%;
+	padding:20px 5px 10px 5px;
+}
+
+.main {
+	margin-top:0px;
+	width: 100%;
+	border: 0px #CCCCCC dashed;
+}
+.list {
+	width: 100%;
+    margin: 0 auto;
+    margin-top:0px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.listDiv {
+	width: 100%;
+	border:1px #015198 dashed;
+	
+	text-decoration:none;
+}
+table {
+	text-align:left;
+	font-size:14px;
+	padding:2px;
+	width:100%;
+
+}
+td, th {
+	vertical-align:top;
+	height: 20px;
+}
+
+.listTable {
+	width: 100%;
+	
+	vertical-align:middle;
+	text-decoration:none;
+	
+}
+.listTable td {
+	border-bottom: 1px solid #CCCCCC;
+	height:20px;
+}
+.listTable th {
+
+	height:20px;
+}
+.downTable {
+	width: 100%;
+	
+	vertical-align:middle;
+	text-decoration:none;
+
+}
+.downTable td {
+	border-bottom: 1px solid #CCCCCC;
+}
+.downTable th {
+	height: 20px;
+}
+a:link { 
+	color: #0061AE;
+	text-decoration:none;
+}
+a:visited { 
+	color: #0061AE;
+	text-decoration:none;
+}
+a:hover {
+	color: #FF5809;
+}
+.lay_info {
+	color: #FF5809;
+	font-size: 14px;
+}
+hr {
+	height: 1px;
+	color: #CCCCCC;
+}

@@ -1,0 +1,42 @@
+*************************************************************
+数据库：
+
+WEB-INF/applicationContext.xml
+
+<!-- 定义数据源Bean，使用C3P0数据源实现 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		p:driverClass="com.mysql.jdbc.Driver"
+		p:jdbcUrl="jdbc:mysql://localhost:3306/mspaper_new"  【连接】
+		p:user="root" 【用户名】
+		p:password="123" 【密码】
+		p:maxPoolSize="200"
+		p:minPoolSize="2"
+		p:initialPoolSize="2"
+		p:maxIdleTime="2000"
+		destroy-method="close"/>
+
+*************************************************************
+
+修改jsp文件
+
+WEB-INF/content/admin/main/new/newNews.jsp
+WEB-INF/content/admin/main/edit/addNews.jsp
+WEB-INF/content/admin/main/edit/newsEdit.jsp
+WEB-INF/content/admin/main/search/index.jsp
+WEB-INF/content/admin/main/sys/所有jsp文件(除index.jsp)
+WEB-INF/content/admin/main/article/allstatus.jsp
+WEB-INF/content/admin/main/article/status1.jsp
+WEB-INF/content/admin/main/article/status3.jsp
+WEB-INF/content/admin/main/article/status4.jsp
+WEB-INF/content/admin/main/article/status5.jsp
+
+所有下
+
+找到
+
+url : 'http://localhost/pw/```````````'
+
+
+将http://localhost/pw/修改为分配的域名地址
+
+注意：有些jsp文件有多个url : '`````'

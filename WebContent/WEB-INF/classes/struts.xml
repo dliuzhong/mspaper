@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.multipart.parser" value="cos"/> 
+	<package name="admin_main" extends="struts-default" namespace="/admin">
+		<!-- 配置系统的拦截器 -->
+		<interceptors>
+			<!-- 定义系统的登录控制的拦截器 -->
+			<interceptor name="authority" 
+				class="cn.mnu.paper.interceptor.AuthorityInterceptor"/>
+			<!-- 定义系统auctionStack拦截器栈 -->
+			<interceptor-stack name="paperStack">
+				<!-- 引用系统的默认拦截器栈 -->
+				<interceptor-ref name="defaultStack"/>
+				<!-- 引用登录控制拦截器 -->
+				<interceptor-ref name="authority"/>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 将自定义的拦截器栈定义成默认拦截器栈 -->
+		<default-interceptor-ref name="paperStack"/>
+		
+		<global-results>
+			<!-- 下面定义的结果对所有的Action都有效 -->
+			<result name="admin_login" type="redirect">/admin/login</result>
+			<result name="msuser_login" type="redirect">/msuser/login</result>
+			
+		</global-results>
+		
+		<global-exception-mappings>
+			<!-- 指Action抛出PaperException异常时，转入名为exception的结果。 -->
+			<exception-mapping exception="cn.mnu.paper.exception.PaperException" result="exception"/>
+			<!-- 指Action抛出Exception异常时，转入名为exception的结果。 -->
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+
+		<!-- 配置处理用户登录的Action -->
+		<action name="doLogin" class="cn.mnu.paper.action.AdminAction">
+			<!-- 配置处理用户登录后的Result -->
+			<result name="success" type="redirect">main/mainFrame</result>
+			<result name="failure">/WEB-INF/content/admin/login.jsp</result> 
+			<result name="input">/WEB-INF/content/admin/login.jsp</result> 
+			<result name="change_password" type="redirect">main/mainFrame</result> 
+			<!-- 显式引用系统默认拦截器栈 -->
+			<interceptor-ref name="defaultStack"/>
+		</action>
+		<action name="loginout" class="cn.mnu.paper.action.AdminAction" method="loginout">
+			<!-- 配置处理用户登录后的Result -->
+			<result name="success" type="redirectAction">login</result>
+		
+		</action>
+		
+		
+		<action name="*">
+			<result>/WEB-INF/content/admin/{1}.jsp</result>
+		</action>
+		
+	</package> 
+	<package name="admin_main_ajax" extends="admin_main" namespace="/admin/main/ajax">
+		<action name="changeAdminPwd" class="cn.mnu.paper.action.ChangeAdminAction" method="changeAdminPwd">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="*">
+			<result>/WEB-INF/content/admin/main/{1}.jsp</result>
+		</action>
+	</package>
+	<package name="admin_new" extends="admin_main" namespace="/admin/main/new">
+		
+		<action name="newPaper" class="cn.mnu.paper.action.PaperAction" method="newPaper">
+			<result name="success" type="redirect">lay</result>
+			<result name="input">/WEB-INF/content/admin/main/new/startFrame.jsp</result>
+			
+			<result name="failure">/WEB-INF/content/admin/main/new/startFrame.jsp
+			</result>
+		</action>
+		<action name="newPages" class="cn.mnu.paper.action.PagesAction" method="addPages">
+		
+			<result type="chain">start</result>
+			
+		</action>
+		<action name="start" class="cn.mnu.paper.action.PaperAction" method="startPaper">
+		
+			<result>/WEB-INF/content/admin/main/new/startFrame.jsp
+			</result>
+		</action>
+		<action name="addNews" class="cn.mnu.paper.action.NewNewsAction">
+			<result type="chain">newNews</result>
+			<result name="failure" type="chain">newNews</result>
+			<result name="input" type="chain">newNews</result>
+			<result name="error" type="chain">newNews</result>
+		</action>
+		<action name="delete" class="cn.mnu.paper.action.ChangeNewsAction" method="deleteNewNews">
+			<result type="chain">newNews</result>
+			<result name="failure" type="chain">newNews</result>
+			<result name="input" type="chain">newNews</result>
+			<result name="error" type="chain">newNews</result>
+		</action>
+		<action name="newNews" class="cn.mnu.paper.action.ViewNewsAction">
+			<result>/WEB-INF/content/admin/main/new/newNews.jsp
+			</result>
+		</action>
+		
+		<action name="layMain" class="cn.mnu.paper.action.ViewLayoutAction" method="findLayout">
+		
+			<result>/WEB-INF/content/admin/main/new/layMain.jsp
+			</result>
+		</action>
+		<action name="newLay" class="cn.mnu.paper.action.LayUploadAction">
+			<!--  
+			配置fileUpload拦截器
+			<interceptor-ref name="fileUpload">
+				配置允许上传的文件类型
+				<param name="allowedTypes">image/bmp, image/png, image/gir,
+					image/jpeg, image/pjpeg, application/pdf</param>
+				<param name="maximumSize">2000</param>
+			</interceptor-ref>
+			配置系统默认的拦截器
+			<interceptor-ref name="defaultStack" />
+			-->
+			<!-- 动态设置Action的属性 -->
+			<param name="savePath">/paper</param>
+			<result name="input" type="redirectAction">layMain?layout_no=${layout_no}</result>
+			<result name="failure" type="redirectAction">layMain?layout_no=${layout_no}</result>
+			<result type="redirectAction">layMain?layout_no=${layout_no}</result>
+		</action>
+		<action name="uploadImage" class="cn.mnu.paper.action.UploadImageAction">
+			<param name="savePath">/paper/image</param>
+			<result>
+				/WEB-INF/content/uploadImage.jsp
+			</result>
+			
+		</action>
+		
+		<action name="*">
+			<result>/WEB-INF/content/admin/main/new/{1}.jsp</result>
+		</action>
+	</package>
+	<package name="admin_edit" extends="admin_main" namespace="/admin/main/edit">
+		<action name="doSearchPaper" class="cn.mnu.paper.action.ViewPaperAction" method="searchPaper">
+		
+			<result>/WEB-INF/content/admin/main/edit/index_left.jsp
+			</result>
+		</action>
+		<action name="toEditMain" class="cn.mnu.paper.action.ChangePaperAction" method="getPaper">
+			<result>/WEB-INF/content/admin/main/edit/editMain.jsp</result>
+			<result name="input">/WEB-INF/content/admin/main/edit/notice.html</result>
+			<result name="failure">/WEB-INF/content/admin/main/edit/notice.html</result>
+			
+		</action>
+		<action name="editLayoutAndPaperMain" class="cn.mnu.paper.action.ViewLayoutAndNewsAction">
+			<result>
+				/WEB-INF/content/admin/main/edit/editLayoutAndPaperMain.jsp
+			</result>
+		</action>
+		<action name="addNews" class="cn.mnu.paper.action.ViewLayoutAction" method="getLayout">
+			<result>
+				/WEB-INF/content/admin/main/edit/addNews.jsp
+			</result>
+		</action>
+		<action name="uploadImage" class="cn.mnu.paper.action.UploadImageAction">
+			<param name="savePath">/paper/image</param>
+			<result>
+				/WEB-INF/content/uploadImage.jsp
+			</result>
+			
+		</action>
+		<action name="getNewsEdit" class="cn.mnu.paper.action.ChangeNewsAction" method="getNewsAndPic">
+			<result>
+				/WEB-INF/content/admin/main/edit/newsEdit.jsp
+			</result>
+		</action>
+		<action name="*">
+			<result>/WEB-INF/content/admin/main/edit/{1}.jsp</result>
+		</action>
+	</package>
+	<package name="admin_edit_ajax" extends="admin_main" namespace="/admin/main/edit/ajax">
+		<action name="addLayout" class="cn.mnu.paper.action.ChangeLayoutAction" method="addLayout">
+			<param name="savePath">/paper</param>
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="refreshPages" class="cn.mnu.paper.action.PagesAction" method="refreshPages">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="editPaper" class="cn.mnu.paper.action.ChangePaperAction" method="editPaper">
+			<param name="savePath">/paper</param>
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="deletePaper" class="cn.mnu.paper.action.ChangePaperAction" method="deletePaper">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="editLayoutData" class="cn.mnu.paper.action.ChangeLayoutAction" method="changeLayoutData">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="addNews" class="cn.mnu.paper.action.NewNewsAction" method="addNewsAjax">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="editLayoutPicAndPdf" class="cn.mnu.paper.action.ChangeLayoutAction" method="changeLayoutPicAndPdf">
+			<param name="savePath">/paper</param>
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="getNewsBoxes" class="cn.mnu.paper.action.ChangeNewsAction" method="getNewsBoxexAjax">
+			
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		
+		<action name="doReditNews" class="cn.mnu.paper.action.ChangeNewsAction" method="doReditNewsAjax">
+			
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="deleteNews" class="cn.mnu.paper.action.ChangeNewsAction" method="deleteNews">
+			
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="deleteLayout" class="cn.mnu.paper.action.ChangeLayoutAction" method="deleteLayout">
+			
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+	</package>
+	<package name="admin_search" extends="admin_main" namespace="/admin/main/search">
+		
+		<action name="adminSeach" class="cn.mnu.paper.action.ViewNewsAction" method="adminDoSearch">
+			<result>
+				/WEB-INF/content/admin/main/search/index.jsp
+			</result>
+		</action>
+		<action name="adminFind" class="cn.mnu.paper.action.ViewNewsAction" method="adminDoFind">
+			<result>
+				/WEB-INF/content/admin/main/search/index.jsp
+			</result>
+		</action>
+		<action name="downloadReport" class="cn.mnu.paper.action.ViewNewsAction" method="downloadReportExcel">
+			 <result type="stream">
+       			<param name="ContentType">application/vnd.ms-excel</param>
+       			<param name="inputName">excelStream</param>                                     
+    			<param name="contentDisposition">filename="report.xls"</param>
+      		</result>
+      		<result name="failure">/WEB-INF/content/admin/main/search/index.jsp</result>
+		</action>
+		<action name="*">
+			<result>/WEB-INF/content/admin/main/search/{1}.jsp</result>
+		</action>
+	</package>
+	<package name="admin_search_ajax" extends="admin_main" namespace="/admin/main/search/ajax">
+	
+	</package>
+	
+	<package name="admin_sys" extends="admin_main" namespace="/admin/main/sys">
+		<action name="commentSys" class="cn.mnu.paper.action.ChangeCommentAction">
+			<result>
+				/WEB-INF/content/admin/main/sys/commentSys.jsp
+			</result>
+		</action>
+		<action name="*">
+			<result>/WEB-INF/content/admin/main/sys/{1}.jsp</result>
+		</action>
+	</package>
+	<package name="admin_sys_ajax" extends="admin_main" namespace="/admin/main/sys/ajax">
+		<action name="addSubject" class="cn.mnu.paper.action.ChangeSubjectAction" method="addSubject">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+		</action>
+		<action name="changeSubject" class="cn.mnu.paper.action.ChangeSubjectAction" method="changeSubject">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="deleteSubject" class="cn.mnu.paper.action.ChangeSubjectAction" method="deleteSubject">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="doActiveSubject" class="cn.mnu.paper.action.ChangeSubjectAction" method="doActiveSubject">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="doUnactiveSubject" class="cn.mnu.paper.action.ChangeSubjectAction" method="doUnactiveSubject">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="changeCommentOpen" class="cn.mnu.paper.action.ChangeCommentAction" method="changeCommentOpen">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="deleteComment" class="cn.mnu.paper.action.ChangeCommentAction" method="deleteComment">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="passComment" class="cn.mnu.paper.action.ChangeCommentAction" method="passComment">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="unpassComment" class="cn.mnu.paper.action.ChangeCommentAction" method="unpassComment">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="addAdmin" class="cn.mnu.paper.action.ChangeAdminAction" method="addAdmin">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="changeAdmin" class="cn.mnu.paper.action.ChangeAdminAction" method="changeAdmin">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="deleteAdmin" class="cn.mnu.paper.action.ChangeAdminAction" method="deleteAdmin">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		
+		<!-- 投稿系统 -->
+		
+		<action name="addMsuser" class="cn.mnu.paper.action.ChangeMsuserAction" method="addMsuser">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="changeUNPWMsuser" class="cn.mnu.paper.action.ChangeMsuserAction" method="changeUNPWMsuser">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="deleteMsuser" class="cn.mnu.paper.action.ChangeMsuserAction" method="deleteMsuser">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		
+		
+		<action name="addDepartment" class="cn.mnu.paper.action.ChangeDepartmentAction" method="addDepartment">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="changeDepartment" class="cn.mnu.paper.action.ChangeDepartmentAction" method="changeDepartment">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="deleteDepartment" class="cn.mnu.paper.action.ChangeDepartmentAction" method="deleteDepartment">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		
+		<action name="addArticleType" class="cn.mnu.paper.action.ChangeArticleTypeAction" method="addArticleType">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="changeArticleType" class="cn.mnu.paper.action.ChangeArticleTypeAction" method="changeArticleType">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="deleteArticleType" class="cn.mnu.paper.action.ChangeArticleTypeAction" method="deleteArticleType">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+	</package>
+	<!-- 投稿系统 -->
+	<package name="admin_article" extends="admin_main" namespace="/admin/main/article">
+		<action name="uploadImage" class="cn.mnu.paper.action.UploadImageAction">
+			<param name="savePath">/paper/image</param>
+			<result>
+				/WEB-INF/content/uploadImage.jsp
+			</result>
+			
+		</action>
+		
+		<action name="exportSort" class="cn.mnu.paper.action.ArticleSortAction" method="exportSort">
+			<result type="stream">
+       			<param name="ContentType">application/vnd.ms-excel</param>
+       			<param name="inputName">excelStream</param>                                     
+    			<param name="contentDisposition">filename="reportSort.xls"</param>
+      		</result>
+      		
+      		<result name="failure">/WEB-INF/content/admin/main/article/showSort.jsp</result>
+		</action>
+		<action name="*">
+			<result>/WEB-INF/content/admin/main/article/{1}.jsp</result>
+		</action>
+	</package>
+	<package name="admin_article_ajax" extends="admin_main" namespace="/admin/main/article/ajax">
+		<action name="getSort" class="cn.mnu.paper.action.ArticleSortAction">
+			<result>/WEB-INF/content/admin/main/article/showSort.jsp</result>
+		</action>
+		<action name="changeStatusArticle" class="cn.mnu.paper.action.ChangeArticleAction" method="changeStatusArticle">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="changeEditArticle" class="cn.mnu.paper.action.ChangeArticleAction" method="changeEditArticle">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>	
+		</action>
+		<action name="exportArticle" class="cn.mnu.paper.action.ViewArticleAction" method="exportArticle">
+			<result type="stream">
+       			<param name="ContentType">application/msword</param>
+       			<param name="inputName">wordStream</param>                                     
+    			<param name="contentDisposition">filename="report.doc"</param>
+      		</result>
+		</action>
+		<action name="deleteArticle" class="cn.mnu.paper.action.ChangeArticleAction" method="deleteArticle">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>	
+		</action>
+		<action name="publishArticle" class="cn.mnu.paper.action.ChangeArticleAction" method="publishArticle">
+			<result>/WEB-INF/content/json.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>	
+		</action>
+	</package>
+	
+	<package name="paper-myjson" extends="struts-default" namespace="/json">
+		<action name="subjectsQuery" class="cn.mnu.paper.action.ViewSubjectAction" method="subjectsQueryJson">
+			
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+			
+		</action>
+		
+		<action name="papersQuery" class="cn.mnu.paper.action.ViewPaperAction" method="papersQueryJson">
+			
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+			
+		</action>
+		<action name="seachQuery" class="cn.mnu.paper.action.ViewNewsAction" method="searchNewsQueryJson">
+			
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+			
+		</action>
+		<action name="getSubjectsJson" class="cn.mnu.paper.action.ViewSubjectAction" method="getSubjectsJson">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="getCommentsJson" class="cn.mnu.paper.action.ViewCommentAction" method="getCommentsJson">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		<action name="getAdminsJson" class="cn.mnu.paper.action.ViewAdminAction" method="getAdminsJson">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+		</action>
+		
+		<!-- 投稿系统 -->
+		<action name="getMsusersJson" class="cn.mnu.paper.action.ViewMsuserAction" method="getMsusersJson">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="getDepartmentsJson" class="cn.mnu.paper.action.ViewDepartmentAction" method="getDepartmentsJson">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="getArticleTypesJson" class="cn.mnu.paper.action.ViewArticleTypeAction" method="getArticleTypesJson">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="getstatus1ArticlesJson" class="cn.mnu.paper.action.ViewArticleAction" method="getstatus1ArticlesJson">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="getstatusArticlesJson" class="cn.mnu.paper.action.ViewArticleAction" method="getstatusArticlesJson">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		
+		<action name="getAllStatusArticlesJson" class="cn.mnu.paper.action.ViewArticleAction" method="getAllStatusArticlesJson">
+			<result>
+				/WEB-INF/content/json.jsp
+
+			</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+	</package>
+	
+	<!-- 投稿系统-用户管理 -->
+	<package name="msuser" extends="admin_main" namespace="/msuser">
+		<action name="doMsuserLogin" class="cn.mnu.paper.action.MsuserAction">
+			<result name="success" type="redirectAction">main/myArticle?myid=${model.id}</result>
+			<result name="failure">/WEB-INF/content/msuser/login.jsp</result> 
+			<result name="input">/WEB-INF/content/msuser/login.jsp</result> 
+			<result name="show_notice">/WEB-INF/content/msuser/turn.jsp</result> 
+			<result name="change_password">/WEB-INF/content/msuser/changepw.jsp</result> 
+			<!-- 显式引用系统默认拦截器栈 -->
+			<interceptor-ref name="defaultStack"/>
+		</action>
+		<action name="loginout" class="cn.mnu.paper.action.MsuserAction" method="loginout">
+			<result name="success" type="redirect">login</result>
+			
+		</action>
+		<action name="*">
+			<result>/WEB-INF/content/msuser/{1}.jsp</result>
+		</action>
+	</package>
+	<package name="msuser_main" extends="admin_main" namespace="/msuser/main">
+		
+		<action name="changeMsuserData" class="cn.mnu.paper.action.ChangeMsuserAction" method="changeMsuserData">
+			<result>/WEB-INF/content/msuser/main/changeOk.jsp</result>
+			<result name="input">/WEB-INF/content/msuser/input.jsp</result>
+			<result name="failure">/WEB-INF/content/msuser/error.jsp</result>
+		</action>
+		<action name="changeMsuserPW" class="cn.mnu.paper.action.ChangeMsuserAction" method="changeMsuserPW">
+			<result>/WEB-INF/content/msuser/main/changepw.jsp</result>
+			<result name="rechange">/WEB-INF/content/msuser/main/changepw.jsp</result>
+			<result name="input">/WEB-INF/content/msuser/input.jsp</result>
+			<result name="failure">/WEB-INF/content/msuser/error.jsp</result>
+		</action>
+		<action name="viewMsuserData" class="cn.mnu.paper.action.ViewMsuserAction" method="viewMsuserData">
+			<result>/WEB-INF/content/msuser/main/msuserData.jsp</result>
+			<result name="input">/WEB-INF/content/msuser/input.jsp</result>
+			<result name="failure">/WEB-INF/content/msuser/error.jsp</result>
+		</action>
+		<action name="myArticle" class="cn.mnu.paper.action.ViewMyArticleAction">
+			<result>/WEB-INF/content/msuser/main/myArticle.jsp</result>
+			<result name="input">/WEB-INF/content/msuser/input.jsp</result>
+			<result name="failure">/WEB-INF/content/msuser/error.jsp</result>
+		</action>
+		<action name="addMyArticle" class="cn.mnu.paper.action.ChangeMyArticleAction" method="addMyArticle">
+			<result>/WEB-INF/content/msuser/main/articleOk.jsp</result>
+			<result name="input">/WEB-INF/content/msuser/input.jsp</result>
+			<result name="failure">/WEB-INF/content/msuser/error.jsp</result>
+			<result name="exception">/WEB-INF/content/exception.jsp</result>
+			
+		</action>
+		<action name="deleteMyArticle" class="cn.mnu.paper.action.ChangeMyArticleAction" method="deleteMyArticle">
+			<result>/WEB-INF/content/msuser/main/articleOk.jsp</result>
+			<result name="input">/WEB-INF/content/msuser/input.jsp</result>
+			<result name="failure">/WEB-INF/content/msuser/error.jsp</result>
+		</action>
+		<action name="viewMyArticle" class="cn.mnu.paper.action.ChangeMyArticleAction" method="viewMyArticle">
+			<result>/WEB-INF/content/msuser/main/viewmyarticle.jsp</result>
+			<result name="input">/WEB-INF/content/msuser/input.jsp</result>
+			<result name="failure">/WEB-INF/content/msuser/error.jsp</result>
+		</action>
+		<action name="getMyArticle" class="cn.mnu.paper.action.ChangeMyArticleAction" method="getMyArticle">
+			<result>/WEB-INF/content/msuser/main/changeArticleMain.jsp</result>
+			<result name="input">/WEB-INF/content/msuser/input.jsp</result>
+			<result name="failure">/WEB-INF/content/msuser/error.jsp</result>
+		</action>
+		<action name="changeMyArticle" class="cn.mnu.paper.action.ChangeMyArticleAction" method="changeMyArticle">
+			<result>/WEB-INF/content/msuser/main/changeArticleOk.jsp</result>
+			<result name="input">/WEB-INF/content/msuser/input.jsp</result>
+			<result name="failure">/WEB-INF/content/msuser/error.jsp</result>
+		</action>
+		<action name="*">
+			<result>/WEB-INF/content/msuser/main/{1}.jsp</result>
+		</action>
+	</package>
+	<package name="msuser_ajax2_main" extends="admin_main" namespace="/msuser/main/ajax2">
+		<action name="uploadImage" class="cn.mnu.paper.action.UploadImageAction" method="uploadImage">
+			<param name="savePath">/paper/image</param>
+			<result>
+				/WEB-INF/content/uploadImage.jsp
+			</result>
+			
+		</action>
+	</package>
+	<package name="msuser_ajax_main" extends="json-default" namespace="/msuser/main/ajax">
+		<action name="checkEmail" class="cn.mnu.paper.action.VadidateMsuserEmailAction">
+			
+			<result type="json">
+				<param name="tip">tip</param>
+			</result>
+			
+		</action>
+		
+	</package>
+	<package name="msp" extends="struts-default" namespace="/mspaper">
+		<action name="mstop" class="cn.mnu.paper.action.MspaperPaperAction" method="getTop">
+			<result>/WEB-INF/content/mspaper/top.jsp</result>
+		</action>
+		<action name="searchtop" class="cn.mnu.paper.action.MspaperPaperAction" method="getTop">
+			<result>/WEB-INF/content/mspaper/searchTop.jsp</result>
+		</action>
+		<action name="doSearch" class="cn.mnu.paper.action.MspaperNewsAction" method="doSearch">
+			<result>/WEB-INF/content/mspaper/searchMain.jsp</result>
+		</action>
+		<action name="index" class="cn.mnu.paper.action.MspaperPaperAction" method="toIndex">
+			<result type="redirect">/paper/${paperfirst.paper_url}/</result>
+		</action>
+		<action name="prev" class="cn.mnu.paper.action.MspaperPaperAction" method="prevPaper">
+			<result type="redirect">/paper/${backPaper}/</result>
+			<result name="failure">/WEB-INF/content/mspaper/errorPrev.jsp</result>
+		</action>
+		<action name="next" class="cn.mnu.paper.action.MspaperPaperAction" method="nextPaper">
+			<result type="redirect">/paper/${backPaper}/</result>
+			<result name="failure">/WEB-INF/content/mspaper/errorNext.jsp</result>
+		</action>
+		<action name="doComment" class="cn.mnu.paper.action.CommentAction" method="getComment">
+			<result>/WEB-INF/content/mspaper/comment.jsp</result>
+			<result name="failure">/WEB-INF/content/mspaper/nocomment.jsp</result>
+		</action>
+		<action name="addComment" class="cn.mnu.paper.action.CommentAction" method="addComment">
+			<result type="redirectAction">doComment?newsid=${newsid}</result>
+			<result name="failure">/WEB-INF/content/mspaper/nocomment.jsp</result>
+		</action>
+		
+	</package>
+	
+</struts>

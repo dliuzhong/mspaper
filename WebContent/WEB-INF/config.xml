@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<config>
+
+<paper>
+	
+<zb>XXX报社集团</zb>
+	
+<cb>XXX出版社</cb>
+	
+<zongb>杨明荣</zongb>
+	
+<email>XXX@163.com</email>
+	
+<laysum>4</laysum>
+</paper>
+<comment>
+	
+<isShow>true</isShow>
+</comment>
+
+</config>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Spring配置文件的根元素，并指定Schema信息 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<!-- 配置daoTemplate，作为所有DAO组件的模板 -->
+	<!-- 为DAO组件注入SessionFactory引用 -->
+	<bean id="daoTemplate" abstract="true"
+		p:sessionFactory-ref="sessionFactory"/>
+	<!-- 配置AdminDao组件 -->
+	<bean id="adminDao" parent="daoTemplate"
+		class="cn.mnu.paper.dao.impl.AdminDaoHibernate"/>
+	<bean id="paperDao" parent="daoTemplate"
+		class="cn.mnu.paper.dao.impl.PaperDaoHibernate"/>
+	<bean id="layoutDao" parent="daoTemplate"
+		class="cn.mnu.paper.dao.impl.LayoutDaoHibernate"/>
+	<bean id="newsDao" parent="daoTemplate"
+		class="cn.mnu.paper.dao.impl.NewsDaoHibernate"/>
+	<bean id="subjectDao" parent="daoTemplate"
+		class="cn.mnu.paper.dao.impl.SubjectDaoHibernate"/>
+	<bean id="commentDao" parent="daoTemplate"
+		class="cn.mnu.paper.dao.impl.CommentDaoHibernate"/>
+	<bean id="msuserDao" parent="daoTemplate"
+		class="cn.mnu.paper.dao.impl.MsuserDaoHibernate"/>
+	<bean id="departmentDao" parent="daoTemplate"
+		class="cn.mnu.paper.dao.impl.DepartmentDaoHibernate"/>
+	<bean id="articleTypeDao" parent="daoTemplate"
+		class="cn.mnu.paper.dao.impl.ArticleTypeDaoHibernate"/>
+	<bean id="articleStatusDao" parent="daoTemplate"
+		class="cn.mnu.paper.dao.impl.ArticleStatusDaoHibernate"/>
+	<bean id="articleDao" parent="daoTemplate"
+		class="cn.mnu.paper.dao.impl.ArticleDaoHibernate"/>
+</beans>

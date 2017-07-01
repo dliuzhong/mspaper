@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+
+.div{
+	position:absolute;
+	z-index: 990; 
+	border: 2px dashed blue;
+	width:0px; 
+	height:0px;
+	left:0px; 
+	top:0px; 
+	overflow:hidden;
+}
+.digidiv {
+	position:absolute;
+	z-index: 999; 
+	border: 1px solid black;
+	width: 58px; 
+	height: 20px;
+	left: 0px; 
+	top: 0px; 
+	overflow: hidden;
+	background: #FFFFFF;
+}
+.retc{
+	position:absolute;
+	border:1px solid #CCCCCC;
+	overflow: hidden;
+	background:#EFEFEF;
+	filter:alpha(Opacity=80);
+	cursor: crosshair;
+}
+.retcOK{
+	position:absolute;
+	z-index: 990;
+	border:1px solid #CCCCCC;
+	overflow:hidden;
+	background: green;
+	filter:alpha(Opacity=50);
+}
+.main {
+	width: 100%;
+	margin-left:auto;
+	margin-top: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	left: auto;
+	top: auto;
+	bottom: auto;
+}
+.editMain {
+	float: left;
+	width: 450px;
+}
+.editPage {
+	float: left;
+	width: 450px;
+	
+}
+.blankMain {
+	float: left;
+	width: 20px;
+	
+}
+.haveDiv {
+	float: left;
+	font-size: 13px;
+	color: red;
+	width: 300px;
+}
+ol {
+	color: red;
+	font-size: 13px;	
+	margin-left: 10px;
+}
+p {
+	color: red;
+	font-size: 14px;	
+	text-align: center;
+}

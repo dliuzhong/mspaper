@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<decorators defaultdir="/decorators">
+    <!-- 在excludes元素下指定的页面将不会由SiteMesh来装饰 -->
+    <excludes>
+   		<pattern>/admin/main/ajax/*</pattern>
+        <pattern>/admin/main/edit/ajax/*</pattern>
+    	<pattern>/admin/main/sys/ajax/*</pattern>
+    	<pattern>/admin/main/article/ajax/*</pattern>
+    	<pattern>/msuser/main/ajax/*</pattern>
+    	<pattern>/msuser/main/ajax2/*</pattern>
+    </excludes>
+	
+	<!-- 创建一个名为main的装饰器，该装饰器页面为main.jsp,
+	     用于装饰pattern指定的URL的所有页面-->
+	
+    <decorator name="main" page="admin/main.jsp">
+        <pattern>/admin/main/*</pattern>
+        <pattern>/admin/main/*.action</pattern>
+        <pattern>/admin/main/new/*</pattern>
+        <pattern>/admin/main/new/*.action</pattern>
+        <pattern>/admin/main/edit/*</pattern>
+        <pattern>/admin/main/search/*</pattern>
+    </decorator>
+    <decorator name="admin_login" page="admin/main_login.jsp">
+        <pattern>/admin/*</pattern>
+    </decorator>
+    <decorator name="msuser" page="admin/msuser_main.jsp">
+        <pattern>/msuser/main/*</pattern>
+        <pattern>/msuser/main/*.action</pattern>
+    </decorator>
+    <decorator name="msuser_login" page="admin/msuser_login.jsp">
+        <pattern>/msuser/*</pattern>
+    </decorator>
+   
+</decorators>

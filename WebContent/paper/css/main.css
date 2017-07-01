@@ -1,0 +1,254 @@
+/* 
+    Document   : main
+    Created on : 2013-12-19, 14:30:31
+    Author     : MDL
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+body {
+		background-color: #F5FFFA;
+        width:100%;
+        margin:0 auto;
+        padding:0px;
+        MARGIN-RIGHT: auto;
+        MARGIN-LEFT: auto;
+        text-decoration:none;
+}
+.leftDiv {
+    float: left;
+    margin-top: -200px;
+    z-index: 1000;
+    padding-top: 10px;
+
+}
+iframe.frameLeft {
+
+    width: 448px;
+    height: 620px;
+    scrolling: no;
+
+    margin-top:0px;
+
+}
+iframe.frameRight {
+	border: 1px #E0E0E0 solid;
+	-moz-border-radius: 3px;
+ 	-webkit-border-radius: 3px;
+ 	border-radius: 3px;
+	width: 540px;
+	float: none;
+	scrolling: no;
+	align: right;
+}
+.top {
+	font-size:13px;
+	color:#000000;
+	text-decoration:none;
+	
+}
+.container {
+
+    width: 1000px;
+
+    margin: 0 auto;
+    margin-top:0px;
+
+}
+.bottomfont {
+	font-size: 12px;
+	color: #6C6C6C;
+	padding: 1px 0px 0px 0px;
+}
+.bottomDiv {
+	overflow: auto;
+    margin: 0 auto;
+    margin-top:0px;
+    margin-left:auto;
+    margin-right:auto;
+	width: 1000px;
+	text-align: center;
+}
+.buttonPrev {
+	display: none;
+	width: 40px;
+	position: absolute;
+	top: 10px;
+	margin-left: 434px;
+	right: auto;
+	bottom: auto;
+	z-index: 2;
+	cursor: pointer;
+}
+.buttonNext {
+	width: 40px;
+	position: absolute;
+	top: 10px;
+    margin-left: 434px;
+	right: auto;
+	bottom: auto;
+	cursor: pointer;
+	z-index: 2;
+}
+.indexTop {
+	width: 1000px;
+	color: #0151AE;
+	font-size:13px;
+	padding-top: 10px;
+	line-height: 160%;
+	vertical-align: middle; 
+	margin: 0 auto;
+    margin-top:0px;
+    margin-left:auto;
+    margin-right:auto;
+	text-align: right;
+	
+}
+.search {
+	text-align:center;
+	font-size:13px;
+	color: #5B5B5B;
+	padding: 5px 0 0 0;
+}
+.searchDiv {
+	width: 1000px;	
+	margin: 0px auto;
+	height: 30px;
+	padding: 10px 0px 0px 10px;
+	font-size:14px;
+	text-align:center;
+	color: #5B5B5B;
+}
+.resultDiv {
+	border: 1px #E0E0E0 solid;
+	width: 1000px;
+	margin: 0px auto;
+	overflow: auto;
+	padding: 30px 30px 30px 30px;
+	text-size: 15px;
+	line-height: 120%;
+	text-decoration:none;
+	color: #015198;
+	background-color: #FFFFFF;
+ 	
+	-moz-border-radius: 8px;
+ 	-webkit-border-radius: 8px;
+ 	border-radius: 8px;
+}
+label {
+	color: #7E3D76;
+	font-size: 12px;
+	font-style: italic;
+}
+.resultDiv a:link { 
+	color: black;
+	font-size: 16px;
+}
+.resultDiv a:visited { 
+	color: black;
+}
+.resultDiv a:hover {
+	color: #FF5809;
+}
+.pageMainDiv {
+	height: 40px;
+	text-decoration:none;
+	
+	align: right;
+	padding-left: 60%;
+	font-size: 13px;
+	
+}
+.pageMainDiv a:link {
+	font-size: 13px;
+	
+}
+.pageDiv {
+	float: left;
+	font-size: 13px;
+	padding: 5px 10px 5px 160px;
+}
+input[type="radio"] {
+	cursor: pointer;	
+}
+input[type="submit"] {
+	cursor: pointer;	
+}
+input[type="text"] {
+	broder: 4px #E0E0E0 solid;
+	color: #015198; 
+}
+.backToTop {
+    display: none;
+    width: 30px;
+    line-height: 1.2;
+    padding: 5px 0;
+    background-color: #0061AE;
+    color: #FFFFFF;
+    font-size: 15px;
+    text-align: center;
+    position: fixed;
+    margin-left: 991px;
+    bottom: 170px;
+    _position: absolute;
+    _right: 10px;
+    _bottom: 100px;
+    _bottom: "auto";
+    cursor: pointer;
+    opacity: .8;
+    filter: Alpha(opacity=80);
+}
+.prevPaper {
+	cursor: pointer;
+	color:#000000;
+	font-size: 13px;
+	width: 66px;
+	float:left;
+}
+.prevPaper a {
+	
+	color:#000000;
+	
+}
+.nextPaper {
+	cursor: pointer;
+	color:#000000;
+	font-size: 13px;
+	dispaly: none;
+	width: 45px;
+	float:left;
+}
+.nextPaper a {
+	
+	color:#000000;
+	
+}
+.comTop {
+	position: fixed;
+	width: 100%;
+    top: 0px;
+    height: 34px;
+    padding-top: 12px;
+	font-size: 20px;
+	font-family:'黑体';
+	color: #FFFFFF;
+	background-color:#015198;
+}
+.num {
+    border: 1px solid #000000;
+    text-align: left;
+    height: 20px;
+    font-size: 14px;
+    padding-left: 4px;
+    border: 1px;
+    display:-moz-inline-box;
+    display:inline-block;
+    color: #ffffff;
+    background: #0061AE;
+
+}
